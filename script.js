@@ -6,7 +6,7 @@ var searchHistory = localStorage.getItem('serchHistory')
 //forcast api call `https://api.openweathermap.org/data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&appid=22ffcf9ab3ce5bcf313e65a60e0935fc`
 
 function searchCity(cityName){
-    let apiurl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=22ffcf9ab3ce5bcf313e65a60e0935fc`    
+    let apiurl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=22ffcf9ab3ce5bcf313e65a60e0935fc`    
     
     fetch(apiurl)
     .then((Response) => {
