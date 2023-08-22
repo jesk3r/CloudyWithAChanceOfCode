@@ -30,9 +30,38 @@ function searchCity(cityName){
       todayCard.children('p').eq(1).text('Wind: '+ data.wind.speed)
       todayCard.children('p').eq(2).text('Humidity: '+ data.main.humidity)
 
-      return fetch('https://api.openweathermap.org/data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&appid=22ffcf9ab3ce5bcf313e65a60e0935fc&units=metric')
+      return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=22ffcf9ab3ce5bcf313e65a60e0935fc&units=metric`)
     }).then(Response => {
       return Response.json()
+    }).then((data) => {
+      let fristCard = $('#forecast-card-1')
+      console.log(data)
+
+      for (let i = 0; i < 6; i++) {
+        let index;
+        if(i === 0){
+          index = i * 8 
+        }else{
+          index = i * 8 -1
+        }
+      
+        console.log(index)
+        fristCard = $(`#forecast-card-${(i+1)}`)
+        fristCard.children('p').eq(0).text( data.list[index].dt_txt.split(' ')[0].replaceAll('-','/'))
+        fristCard.children('img').eq(0).attr('src', `http://openweathermap.org/img/w/${data.list[index].weather[0].icon}.png`)
+        fristCard.children('p').eq(1).text("Temp: " +data.list[index].main.temp + ' °C')
+        fristCard.children('p').eq(2).text('Wind: ' + data.list[index].wind.speed + ' KPH')
+        fristCard.children('p').eq(3).text('Humidity: ' + data.list[index].main.humidity + " %")
+      }
+
+      // fristCard.children('p').eq(0).text( data.list[0].dt_txt.split(' ')[0].replaceAll('-','/'))
+      // fristCard.children('img').eq(0).attr('src', `http://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png`)
+      // fristCard.children('p').eq(1).text("Temp: " +data.list[0].main.temp + ' °C')
+      // fristCard.children('p').eq(2).text('Wind: ' + data.list[0].wind.speed + ' KPH')
+      // fristCard.children('p').eq(3).text('Humidity: ' + data.list[0].main.humidity + " %")
+
+
+
     });
 }
 
