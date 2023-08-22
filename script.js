@@ -6,7 +6,7 @@ var searchHistory = localStorage.getItem('serchHistory')
 //forcast api call `https://api.openweathermap.org/data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&appid=22ffcf9ab3ce5bcf313e65a60e0935fc`
 
 function searchCity(cityName){
-    let apiurl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=22ffcf9ab3ce5bcf313e65a60e0935fc`    
+    let apiurl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=22ffcf9ab3ce5bcf313e65a60e0935fc`    
     
     fetch(apiurl)
     .then((Response) => {
@@ -17,7 +17,7 @@ function searchCity(cityName){
     .then((data) => {
      
 
-      return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=22ffcf9ab3ce5bcf313e65a60e0935fc&units=metric
+      return fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=22ffcf9ab3ce5bcf313e65a60e0935fc&units=metric
       `)
     }).then((Response) => {
       return Response.json()
@@ -36,7 +36,7 @@ function searchCity(cityName){
       todayCard.children('p').eq(1).text('Wind: '+ data.wind.speed)
       todayCard.children('p').eq(2).text('Humidity: '+ data.main.humidity)
 
-      return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=22ffcf9ab3ce5bcf313e65a60e0935fc&units=metric`)
+      return fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=22ffcf9ab3ce5bcf313e65a60e0935fc&units=metric`)
     }).then(Response => {
       return Response.json()
     }).then((data) => {
